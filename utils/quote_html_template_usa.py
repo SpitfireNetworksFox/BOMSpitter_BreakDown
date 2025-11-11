@@ -72,7 +72,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   font-size:11px; text-align:center; padding:12px 8px; border-right:1px solid #ddd; background:#f9f9f9;
 }
 
-/* Items table */
+/* Items section */
 .items-section{ 
   margin:20px 0; 
   page-break-inside: auto; /* Allow breaking inside items section */
@@ -96,12 +96,17 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
 .col-cat      { width:110px; text-align:center; }
 .col-sku      { width:120px; text-align:center; }
 .col-qty      { width:40px;  text-align:center; }
+
+/* NEW: Start/End Date */
+.col-start    { width:90px;  text-align:center; }
+.col-end      { width:90px;  text-align:center; }
+
 .col-desc { 
-  width:300px; 
+  width:260px; 
   text-align:left; 
   word-wrap:break-word; 
   line-height:1.3; 
-  white-space: pre-wrap;   /* ← add this */
+  white-space: pre-wrap;
 }
 .col-price    { width:80px;  text-align:right; }
 .col-extended { width:80px;  text-align:right; }
@@ -145,17 +150,15 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
 .notes-content li{ margin-bottom:8px; }
 
 /* Signature */
-/* >>> CHANGE: make signature a new-page block and unbreakable <<< */
+/* Keep signature on a new page and unbroken */
 .signature-section{
   margin-top:25px;
   border:2px solid #061528;
   background:white;
 
-  /* never split the signature */
   break-inside: avoid;
   page-break-inside: avoid;
 
-  /* always start the signature on a fresh page */
   break-before: page;          /* modern */
   page-break-before: always;   /* legacy */
 }
@@ -259,6 +262,11 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
           <th class="col-cat">Category</th>
           <th class="col-sku">SKU</th>
           <th class="col-qty">Qty</th>
+
+          <!-- NEW: Start/End Date headers -->
+          <th class="col-start">Start Date</th>
+          <th class="col-end">End Date</th>
+
           <th class="col-desc">Description</th>
 
           {% if round_values == "True" %}
@@ -279,6 +287,11 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
           <td class="col-cat">{{ row["category"] }}</td>
           <td class="col-sku">{{ row["pt_sku"] }}</td>
           <td class="col-qty">{{ row["qty"] }}</td>
+
+          <!-- NEW: Start/End Date cells -->
+          <td class="col-start">{{ row["start_date"] }}</td>
+          <td class="col-end">{{ row["end_date"] }}</td>
+
           <td class="col-desc">{{ row["description"] }}</td>
         {% if round_values == "True" %}
           <td class="col-price">${{"{:,.0f}".format((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1))}}</td>
@@ -293,7 +306,8 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
         </tr>
         {% if row["notes"] %}
         <tr>
-          <td colspan="4"></td>
+          <!-- UPDATED: colspan from 4 → 6 to account for Start/End columns -->
+          <td colspan="6"></td>
           <td class="col-desc" style="font-style:italic;color:#666;padding-left:20px;">{{ row["notes"] }}</td>
           <td colspan="{% if round_values == 'True' %}2{% else %}{% if show_list_price == 'True' %}3{% else %}2{% endif %}{% endif %}"></td>
         </tr>
@@ -329,7 +343,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   </div>
   {% endif %}
 
-  <!-- Signature Section (now always starts on a new page and never splits) -->
+  <!-- Signature Section (new page, unbroken) -->
   <div class="signature-section">
     <div class="sig-header">
       <div class="sig-contact">
