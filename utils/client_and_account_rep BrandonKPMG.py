@@ -1,0 +1,27 @@
+from datetime import datetime, timedelta
+
+clientAndAccountReps = {
+    "bom_name": "Quotation",
+    "contact_name": "Steve Thiel",
+    "comp_name": "KPMG",
+    "comp_address": "75 Chestnut Ridge Rd",
+    "comp_city": "Montvale",
+    "comp_state": "NJ",
+    "comp_zip": "07645",
+    "comp_phone": "+1 (201) 307-7000",
+    "term": "12 Months",
+    "payment_terms": "Net 45, O.A.C.",
+    "incoterms": "DAP",
+    "currency": "USD",
+    "duty": "Included",
+    "taxes": "Excluded",
+    "sales_desk_email": "orders@spitfirenetworks.com",
+    "owner_name": "Brandon Hepburn",
+    "owner_email": "brandon@spitfirenetworks.com",
+    "owner_phone": "+1 (613) 668-0299",
+    # "quote_number": f"Q-{datetime.now().strftime('%y%m%d%M%S')}",
+    "date": datetime.now().strftime("%m/%d/%Y"),
+    "expiry": (datetime.now() + timedelta(days=30)).strftime("%m/%d/%Y"),
+    "round_values": "False",
+    "add_notes": [],
+}
