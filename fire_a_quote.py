@@ -7,6 +7,7 @@ import re
 import os
 from pathlib import Path
 from datetime import datetime, timedelta
+from collections import OrderedDict  # ← ADDED
 
 import numpy as np
 import pandas as pd
@@ -310,6 +311,33 @@ def main():
     bom_total = float(np.nansum([i["subtotal"]
                       for i in items])) if items else 0.0
 
+    # ---- NEW: group items by Category & compute per-category subtotals ----
+    def _cat_name(v: str) -> str:
+        s = (v or "").strip()
+        return s if s else "Uncategorized"
+
+    # Preserve first-seen order of categories from the incoming items list
+    ordered_categories: list[str] = []
+    seen = set()
+    for it in items:
+        c = _cat_name(it.get("category"))
+        if c not in seen:
+            ordered_categories.append(c)
+            seen.add(c)
+
+    groups = OrderedDict()
+    for c in ordered_categories:
+        groups[c] = {"category": c, "items": [], "subtotal": 0.0}
+
+    for it in items:
+        c = _cat_name(it.get("category"))
+        g = groups[c]
+        g["items"].append(it)
+        g["subtotal"] += float(it.get("subtotal") or 0.0)
+
+    items_by_category = list(groups.values())
+    # ----------------------------------------------------------------------
+
     # Minimal header meta
     meta = DEFAULTS.copy()
     meta["bom_name"] = excel_path.stem.replace("_", " ")
@@ -347,7 +375,16 @@ def main():
         "round_values": meta["round_values"],
         "sales_desk_email": meta["sales_desk_email"],
         "owner": owner,
+
+        # Keep original list for any legacy template sections
         "items": items,
+
+        # NEW: grouped view for category headers + subtotals in the template
+        "items_by_category": items_by_category,
+
+        # So the template can decide to show/hide List Price
+        "show_list_price": args.show_list_price,
+
         "bom": {
             "bom_name": meta["bom_name"],
             "contact_name": meta["contact_name"],
@@ -379,6 +416,7 @@ def main():
         "excel": str(excel_path.resolve()),
         "items_sheet_used": items_sheet,
         "parsed_items": len(items),
+        "category_groups": len(items_by_category),  # ← helpful runtime info
         "total": round(bom_total, 2),
         "output_html": str(out_path.resolve()),
         "output_pdf": str(out_path.with_suffix('.pdf').resolve())

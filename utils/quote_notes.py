@@ -8,6 +8,5 @@ notes = [
     "Support and Maintenance are non-terminable and non-refundable.",
     "Support and Maintenance are subject to the Terms and Conditions under manufacturer’s/licensor’s Support and Maintenance Policy or Service Agreement which is subject to change. Particulars will be provided upon request.",
     "Shipping costs are not included in this Quote. Actual shipping charges will be determined at the time of shipment and included on the applicable invoice.",
-   	"Quotation is subject to Spitfire Networks’ Terms and Conditions at: https://www.spitfirenetworks.com/terms-and-conditions ",
-       "SAMPLE QUOTE, NOT REAL"
+   	"Quotation is subject to Spitfire Networks’ Terms and Conditions at: https://www.spitfirenetworks.com/terms-and-conditions "
 ]

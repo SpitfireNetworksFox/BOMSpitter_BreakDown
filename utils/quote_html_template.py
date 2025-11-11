@@ -45,7 +45,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
 
 .logo {
   position: absolute;
-  top: 40px;              /* 1 inch down */
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
   width: auto;
@@ -72,13 +72,13 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   font-size:11px; text-align:center; padding:12px 8px; border-right:1px solid #ddd; background:#f9f9f9;
 }
 
-/* Items table */
-.items-section{ 
-  margin:20px 0; 
-  page-break-inside: auto; /* Allow breaking inside items section */
+/* Items section */
+.items-section{
+  margin:20px 0;
+  page-break-inside: auto;
 }
 .items-table{
-  width:100%; border-collapse:collapse; border:2px solid #061528; margin-bottom:15px;
+  width:100%; border-collapse:collapse; border:2px solid #061528; margin-bottom:10px;
 }
 .items-table thead th{
   background:#061528; color:white; font-size:11px; font-weight:600; text-align:center;
@@ -93,49 +93,80 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
 
 /* Column widths + alignment */
 .col-item     { width:40px;  text-align:center; }
-.col-cat      { width:110px; text-align:center; }
+/* .col-cat removed (category now in header) */
 .col-sku      { width:120px; text-align:center; }
 .col-qty      { width:40px;  text-align:center; }
-.col-desc { 
-  width:300px; 
-  text-align:left; 
-  word-wrap:break-word; 
-  line-height:1.3; 
-  white-space: pre-wrap;   /* ← add this */
+
+/* Start/End Date */
+.col-start    { width:90px;  text-align:center; }
+.col-end      { width:90px;  text-align:center; }
+
+.col-desc {
+  width:340px; /* widened because we removed Category column */
+  text-align:left;
+  word-wrap:break-word;
+  line-height:1.3;
+  white-space: pre-wrap;
 }
 .col-price    { width:80px;  text-align:right; }
 .col-extended { width:80px;  text-align:right; }
 
-/* Total section - separate from table */
-.total-section{
-  margin-top:15px;
+/* Category header + category subtotal */
+.cat-header{
+  margin: 18px 0 8px 0;
+  font: 700 16px Manrope, sans-serif;
+  color:#061528;
+  border-left: 4px solid #061528;
+  padding-left: 10px;
+}
+.subtotal-section{
+  margin:8px 0 18px 0;
   border:2px solid #061528;
   background:white;
-  page-break-inside: avoid; /* Prevent breaking inside the total section */
-  break-inside: avoid; /* For newer browsers */
-  min-height: 60px; /* Ensure minimum height */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
-.total-row{ 
-  background:#061528 !important; 
-  color:white; 
-  font-weight:700; 
+.subtotal-row{
+  background:#EDEFF7;
+  color:#061528;
+  font-weight:700;
   display:flex;
   align-items:center;
-  min-height: 60px; /* Match the section height */
+  min-height:48px;
+}
+.subtotal-label{ flex:1; padding:14px 10px; font-size:12px; text-align:left; }
+.subtotal-amount{ min-width:110px; padding:14px 12px; font-size:13px; text-align:right; border-left:1px solid #000; }
+
+/* Grand Total */
+.total-section{
+  margin-top:6px;
+  border:2px solid #061528;
+  background:white;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  min-height: 60px;
+}
+.total-row{
+  background:#061528 !important;
+  color:white;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  min-height: 60px;
 }
 .total-label{
   flex:1;
-  padding:20px 8px; /* Increased padding from 15px to 20px */
+  padding:20px 8px;
   font-size:12px;
-  text-align:left; /* Changed from right to left */
+  text-align:left;
 }
 .total-amount{
-  min-width: 110px;   /* increased from 80px */
-  padding:20px 12px;  /* a bit more padding */
-  font-size:14px;     /* optional: make it larger */
-  text-align:right;   /* align right looks cleaner for numbers */
+  min-width: 110px;
+  padding:20px 12px;
+  font-size:14px;
+  text-align:right;
   border-left:1px solid #000000;
-  word-break: keep-all; /* prevent breaking mid-number */
+  word-break: keep-all;
 }
 
 /* Notes */
@@ -145,17 +176,14 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
 .notes-content li{ margin-bottom:8px; }
 
 /* Signature */
-/* >>> CHANGE: make signature a new-page block and unbreakable <<< */
 .signature-section{
   margin-top:25px;
   border:2px solid #061528;
   background:white;
 
-  /* never split the signature */
   break-inside: avoid;
   page-break-inside: avoid;
 
-  /* always start the signature on a fresh page */
   break-before: page;          /* modern */
   page-break-before: always;   /* legacy */
 }
@@ -177,10 +205,10 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   .page-container{
     box-shadow:none;
     padding:12px 14px 16px 14px; /* was 25px */
-    min-height:auto;             /* no forced height */
+    min-height:auto;
   }
   .header-container{
-    padding:0 220px 8px 0; /* keep space for Q# on the right; tighter bottom */
+    padding:0 220px 8px 0;
     margin-bottom:12px;
   }
   .header-container h4{ margin:0 0 4px 0; }
@@ -189,21 +217,19 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   .term { position:absolute !important; top:25px; right:0; }
   .items-table tbody tr:hover{ background:transparent; }
 
-  /* keep totals as a single block */
   .total-section{
     page-break-inside: avoid !important;
     break-inside: avoid !important;
     margin-top: 10px;
     min-height: 60px !important;
   }
-
   .total-row{ min-height: 60px !important; }
   .total-label, .total-amount{
     padding: 20px 8px !important;
     text-align: left !important;
   }
 
-  .items-table { margin-bottom: 10px; }
+  .items-table { margin-bottom: 8px; }
 }
 
 /* Screen-only responsive tweaks */
@@ -220,7 +246,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   <div class="header-container">
     <img class="logo" src="data:image/png;base64,{{ img_str }}" alt="Logo">
     <h4>Quotation: {{ bom["bom_name"] }}</h4>
-    <h4>Spitfire Networks Inc</h4>
+    <h4>Spitfire Networks, Inc</h4>
     <p>Attention: {{ bom["contact_name"] }}</p>
     <p>{{ bom["comp_name"] }}</p>
     <p>{{ bom["comp_address"] }}</p>
@@ -250,68 +276,106 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
     </tbody>
   </table>
 
-  <!-- Items Section -->
+  <!-- Items Section (grouped by category) -->
   <div class="items-section">
-    <table class="items-table">
-      <thead>
-        <tr>
-          <th class="col-item">Item #</th>
-          <th class="col-cat">Category</th>
-          <th class="col-sku">SKU</th>
-          <th class="col-qty">Qty</th>
-          <th class="col-desc">Description</th>
 
-          {% if round_values == "True" %}
-            <th class="col-price">Price</th>
-          {% else %}
-            {% if show_list_price == "True" %}
-              <th class="col-price">List Price</th>
+    {# Global counter for continuous Item # across categories #}
+    {% set idx = namespace(i=0) %}
+
+    {% for group in items_by_category %}
+      <div class="cat-header">{{ group["category"] }}</div>
+
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th class="col-item">Item #</th>
+            <th class="col-sku">SKU</th>
+            <th class="col-qty">Qty</th>
+            <th class="col-start">Start Date</th>
+            <th class="col-end">End Date</th>
+            <th class="col-desc">Description</th>
+
+            {% if round_values == "True" %}
+              <th class="col-price">Price</th>
+            {% else %}
+              {% if show_list_price == "True" %}
+                <th class="col-price">List Price</th>
+              {% endif %}
+              <th class="col-price">Unit Price</th>
             {% endif %}
-            <th class="col-price">Unit Price</th>
+            <th class="col-extended">Extended</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in group["items"] %}
+          {% set idx.i = idx.i + 1 %}
+          <tr>
+            <td class="col-item">{{ idx.i }}</td>
+            <td class="col-sku">{{ row["pt_sku"] }}</td>
+            <td class="col-qty">{{ row["qty"] }}</td>
+            <td class="col-start">{{ row["start_date"] }}</td>
+            <td class="col-end">{{ row["end_date"] }}</td>
+            <td class="col-desc">{{ row["description"] }}</td>
+
+            {% if round_values == "True" %}
+              <td class="col-price">
+                ${{ "{:,.0f}".format((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1)) }}
+              </td>
+              <td class="col-extended">
+                ${{ "{:,.0f}".format(row["subtotal"]|float) }}
+              </td>
+            {% else %}
+              {% if show_list_price == "True" %}
+                <td class="col-price">
+                  ${{ "{:,.2f}".format((row["list_price"]|float) if row.get("list_price") else ((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1))) }}
+                </td>
+              {% endif %}
+              <td class="col-price">
+                ${{ "{:,.2f}".format((row["unit_price"]|float) if row.get("unit_price") is not none else ((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1))) }}
+              </td>
+              <td class="col-extended">
+                ${{ "{:,.2f}".format(row["subtotal"]|float) }}
+              </td>
+            {% endif %}
+          </tr>
+
+          {% if row["notes"] %}
+          <tr>
+            <!-- 5 columns before Description (Item, SKU, Qty, Start, End) -->
+            <td colspan="5"></td>
+            <td class="col-desc" style="font-style:italic;color:#666;padding-left:20px;">{{ row["notes"] }}</td>
+            <td colspan="{% if round_values == 'True' %}2{% else %}{% if show_list_price == 'True' %}3{% else %}2{% endif %}{% endif %}"></td>
+          </tr>
           {% endif %}
-          <th class="col-extended">Extended</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for row in items %}
-        <tr>
-          <td class="col-item">{{ loop.index }}</td>
-          <td class="col-cat">{{ row["category"] }}</td>
-          <td class="col-sku">{{ row["pt_sku"] }}</td>
-          <td class="col-qty">{{ row["qty"] }}</td>
-          <td class="col-desc">{{ row["description"] }}</td>
-        {% if round_values == "True" %}
-          <td class="col-price">${{"{:,.0f}".format((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1))}}</td>
-          <td class="col-extended">${{"{:,.0f}".format(row["subtotal"]|float)}}</td>
-        {% else %}
-          {% if show_list_price == "True" %}
-            <td class="col-price">${{"{:,.2f}".format((row["list_price"]|float) if row.get("list_price") else ((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1)))}}</td>
-          {% endif %}
-          <td class="col-price">${{"{:,.2f}".format((row["subtotal"]|float) / (row["qty"]|float if row["qty"] else 1))}}</td>
-          <td class="col-extended">${{"{:,.2f}".format(row["subtotal"]|float)}}</td>
-        {% endif %}
-        </tr>
-        {% if row["notes"] %}
-        <tr>
-          <td colspan="4"></td>
-          <td class="col-desc" style="font-style:italic;color:#666;padding-left:20px;">{{ row["notes"] }}</td>
-          <td colspan="{% if round_values == 'True' %}2{% else %}{% if show_list_price == 'True' %}3{% else %}2{% endif %}{% endif %}"></td>
-        </tr>
-        {% endif %}
-      {% endfor %}
-      </tbody>
-    </table>
-    
-    <!-- Total section - separate from table to prevent repetition -->
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Category Subtotal -->
+      <div class="subtotal-section">
+        <div class="subtotal-row">
+          <div class="subtotal-label">Subtotal — {{ group["category"] }}</div>
+          <div class="subtotal-amount">
+            {% if round_values == "True" %}{{ "${:,.0f}".format(group["subtotal"]|float) }}
+            {% else %}{{ "${:,.2f}".format(group["subtotal"]|float) }}{% endif %}
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+
+    <!-- Grand Total -->
     <div class="total-section">
       <div class="total-row">
         <div class="total-label">Total</div>
         <div class="total-amount">
-          {% if round_values == "True" %}{{"${:,.0f}".format(bom["total"]|float)}}
-          {% else %}{{"${:,.2f}".format(bom["total"]|float)}}{% endif %}
+          {% if round_values == "True" %}{{ "${:,.0f}".format(bom["total"]|float) }}
+          {% else %}{{ "${:,.2f}".format(bom["total"]|float) }}{% endif %}
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Notes Section -->
@@ -329,12 +393,12 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   </div>
   {% endif %}
 
-  <!-- Signature Section (now always starts on a new page and never splits) -->
+  <!-- Signature Section (new page, unbroken) -->
   <div class="signature-section">
     <div class="sig-header">
       <div class="sig-contact">
         <strong>Please Send orders to:</strong><br>
-        Spitfire Networks Inc<br>
+        Spitfire Networks, Inc<br>
         {{ sales_desk_email }}
       </div>
       <div></div>
