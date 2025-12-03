@@ -6,7 +6,6 @@ notes = [
     "Once license keys have been issued, they are non-refundable.",
     "Support and Maintenance are non-terminable and non-refundable.",
     "Support and Maintenance are subject to the Terms and Conditions under manufacturer’s/licensor’s Support and Maintenance Policy or Service Agreement which is subject to change. Particulars will be provided upon request.",
-    "Shipping costs are not included in this Quote. Actual shipping charges will be determined at the time of shipment and included on the applicable invoice.",
-    "Customer agrees that its use of the above referenced LogicMonitor products and services is subject to LogicMonitor’s standard license terms available at https://www.logicmonitor.com/terms_files/EULA.pdf, unless Customer and LogicMonitor have negotiated and entered into a separate agreement.",
-    "Quotation is subject to Spitfire Networks’ Terms and Conditions at: https://www.spitfirenetworks.com/terms-and-conditions "
+    "All prices are exclusive of applicable taxes. Any sales, use, excise, value-added, or other applicable taxes shall be added to the invoice and are the responsibility of the purchaser.",
+    "This quotation is governed by the terms and conditions of the Master Reseller Agreement between Spitfire Networks, Inc. and KPMG LLP."
 ]

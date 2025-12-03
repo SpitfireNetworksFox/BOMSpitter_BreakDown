@@ -246,7 +246,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
   <div class="header-container">
     <img class="logo" src="data:image/png;base64,{{ img_str }}" alt="Logo">
     <h4>Quotation: {{ bom["bom_name"] }}</h4>
-    <h4>Spitfire Networks, Inc</h4>
+    <h4>Spitfire Networks Inc</h4>
     <p>Attention: {{ bom["contact_name"] }}</p>
     <p>{{ bom["comp_name"] }}</p>
     <p>{{ bom["comp_address"] }}</p>
@@ -398,7 +398,7 @@ body{ margin:0; padding:20px; font-family:Manrope,sans-serif; background:#f8f9fa
     <div class="sig-header">
       <div class="sig-contact">
         <strong>Please Send orders to:</strong><br>
-        Spitfire Networks, Inc<br>
+        Spitfire Networks Inc<br>
         {{ sales_desk_email }}
       </div>
       <div></div>
